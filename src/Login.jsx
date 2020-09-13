@@ -13,7 +13,7 @@ const Login = props => {
     const { from } = props.location.state || { from: { pathname: "/" } };
 
     if (redirectToReferrer) {
-        return <Redirect to={from} />;
+        return <Redirect to={{pathname: '/products', state: {from: props.location}}} />;
     }
 
     return (

@@ -50,14 +50,14 @@
         return(
             <div>
                 <div>
-                    <div>
+                    <div style={{backgroundColor:'#bbff99'}}>
                         <h3> Products</h3>
                         <ul> {linkList} </ul>
                         </div>
                     </div>
     
                     <Route path={`${match.url}/:productId`}
-                    render={ (props) => <Product data= {productsData} {...props} />}/>
+                    render={ (props) => <Product match={match} data= {productsData} {...props} />}/>
                     <Route exact path={match.url}
                     render={() => (
                     <div>Please select a product.</div>
