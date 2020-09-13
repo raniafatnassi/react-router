@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 
 import {Link, Route, Switch, Redirect} from 'react-router-dom';
 
@@ -11,6 +11,12 @@ import fakeAuth  from './Login';
 const Home =()=>(
   <div>
     <h2>Home</h2>
+  </div>
+)
+
+const Admin = () => (
+  <div>
+    <h2>Welcome Rania</h2>
   </div>
 )
 
@@ -30,10 +36,10 @@ const App = () => {
       <nav>
         <ul>
 
-        /* Link components are used for linking to other views */
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/category'>Category</Link></li>
           <li><Link to='/products'>Products</Link></li>
+          <li><Link to='/admin'>Admin Area</Link></li>
 
         </ul>
       </nav>
@@ -41,8 +47,9 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category}/>
+        <Route path='/products' component={Products} />
         <Route path="/login" component={Login}/>
-        <PrivateRoute authed={fakeAuth.isAuthenticated} path='/products' component = {Products} />
+        <PrivateRoute authed={fakeAuth.isAuthenticated} path='/admin' component = {Admin} />
       </Switch>
 
     </div>
