@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {Link, Route, Switch, Redirect} from 'react-router-dom';
 
@@ -31,6 +31,8 @@ const PrivateRoute = ({component: Component, authed, ...rest}) => {
 }
 
 const App = () => {
+  const [auth, setAuth] = useState(false);
+  const prod = (x) => setAuth(x);
   return(
     <div>
       <nav>
@@ -48,8 +50,11 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route path="/category" component={Category}/>
         <Route path='/products' component={Products} />
-        <Route path="/login" component={Login}/>
-        <PrivateRoute authed={fakeAuth.isAuthenticated} path='/admin' component = {Admin} />
+        <Route
+          path="/login"
+          render={(props) => <Login auth={prod} {...props} />}
+        />
+         <PrivateRoute authed={auth} path="/admin" component={Admin} />
       </Switch>
 
     </div>

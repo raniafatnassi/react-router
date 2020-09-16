@@ -1,36 +1,26 @@
-import React from 'react'
+import React from "react";
+import {  Redirect } from "react-router-dom";
+import {  useState } from "react";
 
-import {Redirect} from 'react-router-dom';
-import {useState} from 'react';
-
-const Login = props => {
+const Login = ({location,auth}) => {
     const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
     const login = () => {
-        fakeAuth.authenticate(() => setRedirectToReferrer(true));
+        setRedirectToReferrer(true);
+        auth(true)
     };
 
-    const { from } = props.location.state || { from: { pathname: "/" } };
+    const { from } = location.state;
 
     if (redirectToReferrer) {
-        return <Redirect to={{pathname: '/products', state: {from: props.location}}} />;
+        return <Redirect to={from.pathname} />;
     }
 
     return (
         <div>
-            <p>You must log in to view the page at {from.pathname}</p>
+            <p>You must log in to view the page at {from.pathname} </p>
             <button onClick={login}>Log in</button>
         </div>
     );
 };
-
-
 export default Login;
-
-export const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true;
-        setTimeout(cb, 100);
-    }
-};
