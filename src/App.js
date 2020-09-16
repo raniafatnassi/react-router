@@ -32,7 +32,7 @@ const PrivateRoute = ({component: Component, authed, ...rest}) => {
 
 const App = () => {
   const [auth, setAuth] = useState(false);
-  const prod = (x) => setAuth(x);
+  const user = (x) => setAuth(x);
   return(
     <div>
       <nav>
@@ -52,9 +52,9 @@ const App = () => {
         <Route path='/products' component={Products} />
         <Route
           path="/login"
-          render={(props) => <Login auth={prod} {...props} />}
+          render={(props) => <Login auth={user} {...props} />}
         />
-         <PrivateRoute authed={auth} path="/admin" component={Admin} />
+        <PrivateRoute authed={auth} path="/admin" component={Admin} />
       </Switch>
 
     </div>
